@@ -1,0 +1,27 @@
+{
+  "name": "intro-to-backend",
+  "version": "1.0.0",
+  "description": "a tutorial for introduction to backend",
+  "homepage": "https://github.com/Olorunshogo/mastering-backend#readme",
+  "bugs": {
+    "url": "https://github.com/Olorunshogo/mastering-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olorunshogo/mastering-backend.git"
+  },
+  "license": "MIT",
+  "author": "BAMTEFA Olorunshogo Moses",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1",
+    "nodemon": "^3.1.11"
+  }
+}

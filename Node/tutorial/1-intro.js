@@ -16,26 +16,11 @@ console.log("Hey! It's my first node program.");
 // module - info about current module (file)
 // process - info about env where the program is being executed
 
-var time = 0;
-
-var timeout = setTimeout(function() {
-  console.log("3 seconds have passed");
-}, 3000);
-
-var timeInterval = setInterval(function() {
-  time += 2;
-  console.log(time + " seconds have passed");
-  if (time > 5) {
-    clearInterval(timer);
-  }
-}, 2000);
-
 console.log("Dirname: " + __dirname);
 console.log("File name: " + __filename);
 
 // CommonJS, every file is module (by default)
 // Modules - Encapsulated Code (only share minimum)
-// const data = require("./6-alternative-flavor");
 
 // Local
 const secret = "SUPER SECRET";
@@ -59,8 +44,6 @@ const person = {
 
 // Export default
 module.exports = { 
-  timeout, timeInterval,
-  john, peter,
   sayHi,
   addValues,
   items,
