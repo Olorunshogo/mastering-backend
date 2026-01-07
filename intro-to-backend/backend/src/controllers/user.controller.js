@@ -2,6 +2,7 @@
 // Controllers are the things which really decide what kind of response has to bg to go on the request.
 import { User } from "../models/users.model.js";
 
+// Register user
 const registerUser = async (req, res) => {
   try {
     const  { username, email, password } = req.body;
@@ -46,6 +47,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+// Login user
 const loginUser = async (req, res) => {
   try {    
     // Checking if the user exists already
@@ -86,6 +88,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Logout user
 const logoutUser = async (req, res) => {
   try {
     const { email } = req.body;

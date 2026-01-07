@@ -1,6 +1,6 @@
-Here is the result of writing the first and second file: 
+Here is the async result: 
+ 
 Hello, this is the first text file.
-, 
+ 
 Hello, this is the second text file.
 
-, {flag: "a"}

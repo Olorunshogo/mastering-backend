@@ -1,0 +1,12 @@
+{
+  "name": "node-express-freecodecamp",
+  "version": "1.0.0",
+  "description": "This is the tutorial for learning nodejs and expressjs full course by freecodecamp",
+  "license": "ISC",
+  "author": "BAMTEFA Olorunshogo Moses",
+  "type": "commonjs",
+  "main": "1-into.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

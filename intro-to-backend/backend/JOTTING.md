@@ -2,6 +2,31 @@
 # BACKEND
 How a request flows through an app - Journey of a request
 
+## ER diagram
+This is an ER (Entity Relationship) diagram
+
+``` backend
+
+| Users         | Type             |                                           
+|---------------|------------------|
+| _id           | string        ok                     
+| email         | string                                           
+| password      | string                
+| username      | string              
+| createdAt     | datetime     
+
+| Post          | Type                                                         
+|---------------|------------------ |
+| _id           | string        ok                     
+| name          | string                                           
+| description   | string                
+| age           | string              
+| createdAt     | datetime   
+| updatedAt     | datetime  
+
+```
+
+
 - Income request
 |
 - app.js -- receives the request
