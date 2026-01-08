@@ -1,0 +1,16 @@
+{
+  "name": "packages",
+  "version": "1.0.0",
+  "description": "This is the directory to illustrate what a package.json file is and how to create and use it.",
+  "license": "ISC",
+  "author": "BAMTEFA Olorunshogo Moses",
+  "type": "commonjs",
+  "main": "entry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "lodash": "^4.17.21"
+  }
+}
