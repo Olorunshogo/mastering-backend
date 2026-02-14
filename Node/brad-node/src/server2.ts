@@ -1,4 +1,4 @@
-import { createServer } from "node:http";
+import { createServer, IncomingMessage, ServerResponse } from "node:http";
 import 'dotenv/config';
 
 const PORT2: number = Number(process.env['PORT2']) || 8000;
@@ -15,46 +15,105 @@ const users: User[] = [
   { id: 4, name: "4 Doe Jane Jim" }
 ];
 
-const server = createServer(async(req, res) => {
-  if (req.url === '/api/users' && req.method === "GET") {
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(users));
-    res.end();
+// Logger middleware
+const logger = (
+  req: IncomingMessage,
+  res: ServerResponse,
+  next: () => void
+): void => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+}
 
-  } else if (req.url?.match(/\/api\/users\/([0-9]+)/) && req.method === "GET") {
-    const url = new URL(req.url!, `http://${req.headers.host}`);
-    const id = Number(url.pathname.split('/')[3]);
+// JSON middleware
+const jsonMiddleware = (
+  req: IncomingMessage,
+  res: ServerResponse,
+  next: () => void
+): void => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
+}
 
-    // const idString = req.url.split('/')[3];
+// Route handler for GET /api/users
+const getUsersHandler = (req: IncomingMessage, res: ServerResponse): void => {
+  res.write(JSON.stringify(users));
+  res.end();
+};
 
-    // const id = Number(idString);
+// Route handler for GET /api/users/:id
+const getUserByIdHandler = (req: IncomingMessage, res: ServerResponse): void => {  const url = new URL(req.url!, `http://${req.headers.host}`);
+      const id = Number(url.pathname.split('/')[3]);
 
-    // if (isNaN(id)) {
-    //   res.statusCode = 400;
-    //   res.setHeader('Content-Type', 'application/json');
-    //   res.end(JSON.stringify({ message: "Invalid user id" }));
-    //   return;
-    // }
+      // const idString = req.url.split('/')[3];
 
-    const user = users.find(u => u.id === id);
+      // const id = Number(idString);
 
-    if (!user) {
-      res.statusCode = 404;
+      // if (isNaN(id)) {
+      //   res.statusCode = 400;
+      //   res.setHeader('Content-Type', 'application/json');
+      //   res.end(JSON.stringify({ message: "Invalid user id" }));
+      //   return;
+      // }
+
+      const user = users.find(u => u.id === id);
+
+      if (!user) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ message: "User not found" }));
+        return;
+      }
+
       res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ message: "User not found" }));
-      return;
-    }
+      res.end(JSON.stringify(user));
+};
 
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(user));
+// Not found handler
+const notFoundHandler = (req: IncomingMessage, res: ServerResponse): void => {
+  res.setHeader('Content-Type', 'application/json');
+  res.statusCode = 404;
+  res.write(JSON.stringify({ message: "Route not found" }));
+  res.end();
+}
 
-  } else {
-    res.setHeader('Content-Type', 'application/json');
-    res.statusCode = 404;
-    res.write(JSON.stringify({ message: "Route not found" }));
+// Route handler for POST /api/users
+const createUserHandler = (req: IncomingMessage, res: ServerResponse): void => {
+  let body = '';
+  // Listen for data: The callback should take in a chunk and should be converted to a string
+  req.on('data', (chunk) => {
+    // We need access to that variable and append onto it that chunk
+    body += chunk.toString();
+  });
+
+  // Listen for end: We should have access to the body vairable which would include anything that we include
+  req.on('end', () => {
+    const newUser: User = JSON.parse(body); // Turn it back to normal TS. In reality, it's going into a database
+    users.push(newUser);
+    res.statusCode = 201;
+    res.write(JSON.stringify(newUser));
     res.end();
-  }
+  });
+}
+
+const server = createServer(async(req, res) => {
+  logger(req, res, () => {
+    jsonMiddleware(req, res, () => {
+      if (req.url === "/api/users" && req.method === "GET") {
+        getUsersHandler(req, res);
+      } else if ((req.url?.match(/\/api\/users\/([0-9]+)/) && req.method === "GET")) {
+        getUserByIdHandler(req, res);
+      } else if (req.url === "/api/users" && req.method === "POST") {
+        createUserHandler(req, res);
+      } else {
+        notFoundHandler(req, res);
+      }
+    });
+
+  });
 });
+
+
 
 server.listen(PORT2, () => {
   console.log(`Server 2 is running on port: ${PORT2}`)
