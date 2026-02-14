@@ -5,18 +5,17 @@ import path from 'path';
 import url from "url";
 
 
-const PORT: number = Number(process.env['PORT']) || 8000;
+const PORT1: number = Number(process.env['PORT1']) || 5000;
 
 // GET current path
 const __filename = url.fileURLToPath(import.meta.url);
-console.log("Directory name is: ", __filename);
+console.log("File name is: ", __filename);
 
 const __dirname = path.dirname(__filename);
 console.log("Directory name is: ", __dirname);
 
 
-
-const server = http.createServer((req, res) => {
+const server = http.createServer(async(req, res) => {
   //  Write to the browser
   // res.setHeader('Content-Type', 'text/html');
   // res.setHeader('Content-Type', 'text/plain');
@@ -32,21 +31,24 @@ const server = http.createServer((req, res) => {
   try {
     // Check if GET request
     if (req.method === "GET") {
-
+      let filePath: string;
       // Lets create a router
       if (req.url === "/") {
-        res.writeHead(200, { 'Content-Type': 'text/html'})
-        res.end('<h1>Homepage</h1>');
+        filePath = path.join(__dirname, '..', 'public', 'index.html');
       } else if (req.url === "/about") {
-        res.writeHead(200, { 'Content-Type': 'text/html'})
-        res.end('<h1>About Page!</h1>');
+        filePath = path.join(__dirname, '..', 'public', 'about.html');
       } else {
-        res.writeHead(200, { 'Content-Type': 'text/html'})
+        res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end('<h1>Not Found!</h1>');
+        return;
       }
 
+      const data = await fs.readFile(filePath);
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(data);
     } else {
-      throw new Error("Method not allowed");
+      res.writeHead(405, { 'Content-Type': 'text/plain' });
+      res.end('Method Not Allowed');
     }
 
   } catch (error) {
@@ -58,6 +60,6 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`);
+server.listen(PORT1, () => {
+  console.log(`Server running on port: ${PORT1}`);
 });
