@@ -12,7 +12,13 @@
     "start": "node dist/index.js",
     "server1": "nodemon --watch src --exec tsx src/server1.ts",
     "server2": "nodemon --watch src --exec tsx src/server2.ts",
-    "fsDemo": "tsx src/fsDemo.ts"
+    "fsDemo": "tsx src/fsDemo.ts",
+    "pathDemo": "tsx src/pathDemo.ts",
+    "osDemo": "tsx src/osDemo.ts",
+    "urlDemo": "tsx src/urlDemo.ts",
+    "cryptoDemo": "tsx src/cryptoDemo.ts",
+    "eventsDemo": "tsx src/eventsDemo.ts",
+    "processDemo": "tsx src/processDemo.ts"
   },
   "devDependencies": {
     "@types/node": "^25.2.3",
