@@ -68,7 +68,21 @@ Example:
 5. ORDER (DESC | ASC): Sort the result-set in ascending or descending order - `SELECT * FROM Products ORDER BY Price DESC`;
 6. AND: Filter records based on more than one condition - `SELECT * FROM Customers WHERE Country = 'Spain' AND CustomerName LIKE 'G%'` and `SELECT * FROM Customers WHERE Country = 'Brazil' AND City = 'Rio de Janeiro' AND CustomerID > 50;`;
 7. OR: Filter records if *any* of the conditions are ture - `SELECT * FROM Customers WHERE Country = 'Germany' OR Country = 'Spain';`;
-8. NOT: Filter records that do not match the The NOT operator is used in the WHERE clause to return all records that DO NOT match the specified criteria. It reverses the result of a condition from true to false and vice-versa. - `SELECT * FROM Customers WHERE NOT Country = 'Spain';`;
+8. NOT: Filter records that do not match the The NOT operator is used in the WHERE clause to return all records that DO NOT match the specified criteria. It reverses the result of a condition from true to false and vice-versa. - `SELECT * FROM Customers WHERE NOT Country = 'Spain'`;
+9. INSERT INTO: statement is used to insert new records in a table 
+10. NULL: A `NULL` value represents an unknown, missing, or inapplicable data in a database field: `SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NULL;`.
+11. UPDATE: The `UPDATE` statement is used to update or modify one or more one or more records in a table - `UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;`;
+12: DELETE: The `DELETE` statement is used to delete existing records in a table - `DELETE FROM Customers WHERE CustomerName = 'Alfreds Futterkiste';`;
+13. LIMIT: The following SQL query selects only the first 3 records of the 'Customers' table - `SELECT * FROM Customers LIMIT 3`;
+14. An aggregate function is a function that performs a calculation on a set of values, and returns a single value. The most commonly used SQL aggregate functions are:
+
+- `MIN()` - returns the smallest value of a column - SELECT MIN(PRICE) FROM Prodcuts;
+- `MAX()` - returns the largest value of a column - SELECT MAX(PRICE) FROM Products;
+- `COUNT()` - returns the number of rows in a set - SELECT COUNT (*) FROM Products;
+- `SUM()` - returns the sum of a numerical column
+- `AVG()` - returns the average value of a numerical column - SELECT AVG(Price) FROM Products;
+- Aggregate functions ignore null values (except for COUNT(*)).
+- SELECT * FROM Customers WHERE CustomerName LIKE 'B%';
 
 
 SELECT * FROM Customers WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
@@ -82,6 +96,13 @@ A record, also called a row, is each individual entry that exists in a table. Fo
 
 **Note:** The `WHERE` clause is not only used in `SELECT` statements, it is also used in `UPDATE`, DELETE, etc.
 
+### SQL Constraint Types
+The following constraints are commonly used in SQL:
 
-
-
+- [`NOT NULL`](https://www.w3schools.com/sql/sql_notnull.asp) - Ensures that a column cannot have a NULL value
+- [`UNIQUE`](https://www.w3schools.com/sql/sql_unique.asp) - Ensures that all values in a column are unique
+- [`PRIMARY KEY`](https://www.w3schools.com/sql/sql_primarykey.asp) - Uniquely identifies each row in a table (a combination of a `NOT NULL` and `UNIQUE`)
+- [`FOREIGN KEY`](https://www.w3schools.com/sql/sql_foreignkey.asp) - Establishes a link between data in two tables, and prevents action that will destroy the link between them
+- [`CHECK`](https://www.w3schools.com/sql/sql_check.asp) - Ensures that the values in a column satisfies a specific condition
+- [`DEFAULT`](https://www.w3schools.com/sql/sql_default.asp) - Sets a default value for a column if no value is specified
+- [`CREATE INDEX`](https://www.w3schools.com/sql/sql_create_index.asp) - Creates indexes on columns to retrieve data from the database faster

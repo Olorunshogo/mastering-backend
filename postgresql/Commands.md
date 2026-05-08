@@ -4,6 +4,9 @@
 3. Quit PostgreSQL: `\q`
 4. Check if PostgreSQL is running: `sudo systemctl status postgresql`
 5. Start PostgreSQL: `sudo systemctl start postgresql`
+6. List databases: `\l` or `\list`;
+7. Connect to a database: `\c postgres`;
+8. List tables in current databases: `\dt`;
 
 
 <!-- Create Table -->

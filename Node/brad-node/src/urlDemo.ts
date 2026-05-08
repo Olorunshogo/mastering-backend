@@ -1,4 +1,4 @@
-SELECT version();import url from "url";
+import url from "url";
 
 const urlString: string = "https://www.google.com/search?q=hello+world";
 

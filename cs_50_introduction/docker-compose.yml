@@ -1,0 +1,46 @@
+services:
+  sql:
+    image: mysql:8.4
+    container_name: cs50_sql_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: practice_db
+      MYSQL_USER: student
+      MYSQL_PASSWORD: student
+    ports:
+      - "3307:3306"
+    command: --local-infile=1
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init:/docker-entrypoint-initdb.d
+      - ./docs:/docs:ro
+
+  postgres:
+    image: postgres:16
+    container_name: cs50_sql_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student
+      POSTGRES_DB: practice_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./docs:/docs:ro
+
+  sqlite:
+    image: keinos/sqlite3:latest
+    container_name: cs50_sqlite
+    restart: unless-stopped
+    working_dir: /workspace
+    entrypoint: ["sleep", "infinity"]
+    volumes:
+      - ./sqlite/data:/workspace
+      - ./docs:/docs:ro
+
+volumes:
+  mysql_data:
+  postgres_data:
