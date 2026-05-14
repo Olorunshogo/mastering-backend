@@ -17,15 +17,15 @@ cd cs_50_introduction
 Start all containers:
 
 ```bash
-docker compose up -d
+docker compose up -d --wait
 ```
 
 Start only one environment:
 
 ```bash
-docker compose up -d sql
-docker compose up -d postgres
-docker compose up -d sqlite
+docker compose up -d --wait sql
+docker compose up -d --wait postgres
+docker compose up -d --wait sqlite
 ```
 
 The Make shortcuts are:
@@ -478,14 +478,14 @@ If container is not running:
 
 ```bash
 docker compose ps
-docker compose up -d
+docker compose up -d --wait
 ```
 
 If you want a completely fresh start:
 
 ```bash
 docker compose down -v
-docker compose up -d
+docker compose up -d --wait
 ```
 
 If port conflicts happen:

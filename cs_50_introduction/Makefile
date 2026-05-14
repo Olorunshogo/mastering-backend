@@ -40,22 +40,22 @@ help:
 
 
 up:
-	docker compose up -d
+	docker compose up -d --wait
 
 up-mysql:
-	docker compose up -d sql
+	docker compose up -d --wait sql
 
 up-postgres:
-	docker compose up -d postgres
+	docker compose up -d --wait postgres
 
 up-sqlite:
-	docker compose up -d sqlite
+	docker compose up -d --wait sqlite
 
 down:
 	docker compose down
 
 restart:
-	docker compose down && docker compose up -d
+	docker compose down && docker compose up -d --wait
 
 logs:
 	docker compose logs -f --tail=100
