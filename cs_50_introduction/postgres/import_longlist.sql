@@ -13,7 +13,7 @@ CREATE TABLE longlist (
   pages INTEGER
 );
 
-\copy longlist (isbn, title, author, publisher, published, year, votes, rating, format, pages) FROM '/docs/longlist.csv' WITH (FORMAT csv, HEADER true);
+\copy longlist (isbn, title, author, publisher, published, year, votes, rating, format, pages) FROM '/docs/csv_files/longlist.csv' WITH (FORMAT csv, HEADER true);
 
 SELECT title, author, year, rating
 FROM longlist

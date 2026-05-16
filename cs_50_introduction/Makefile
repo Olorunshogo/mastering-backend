@@ -1,4 +1,4 @@
-.PHONY: help up up-mysql up-postgres up-sqlite down restart logs ps mysql postgres sqlite mysql-root postgres-admin run-mysql run-postgres run-sqlite import-longlist-mysql import-longlist-postgres import-longlist-sqlite reset-mysql reset-postgres reset-sqlite clean
+.PHONY: help up up-mysql up-postgres up-sqlite down restart logs ps mysql postgres sqlite mysql-root postgres-admin run-mysql run-postgres run-sqlite import-longlist-mysql import-longlist-postgres import-longlist-sqlite import-library-sqlite import-all-sqlite i reset-mysql reset-postgres reset-sqlite clean
 
 help:
 	@echo "CS50 SQL practice commands"
@@ -25,10 +25,15 @@ help:
 	@echo "  make run-postgres       Run postgres/init/lesson1.sql"
 	@echo "  make run-sqlite         Run sqlite/data/lesson1.sql"
 	@echo ""
-	@echo "Import docs/longlist.csv:"
+	@echo "Import docs/csv_files/longlist.csv:"
 	@echo "  make import-longlist-mysql"
 	@echo "  make import-longlist-postgres"
 	@echo "  make import-longlist-sqlite"
+	@echo ""
+	@echo "Import relational CSV files (authors/books/ratings/etc):"
+	@echo "  make import-library-sqlite"
+	@echo "  make import-all-sqlite    Start SQLite and import both longlist and library data"
+	@echo "  make i                    Shortcut for import-library-sqlite"
 	@echo ""
 	@echo "Reset practice tables:"
 	@echo "  make reset-mysql        Re-run MySQL lesson1.sql"
@@ -50,6 +55,7 @@ up-postgres:
 
 up-sqlite:
 	docker compose up -d --wait sqlite
+	$(MAKE) import-library-sqlite
 
 down:
 	docker compose down
@@ -95,6 +101,14 @@ import-longlist-postgres:
 
 import-longlist-sqlite:
 	docker compose exec -T sqlite sqlite3 /workspace/practice.db < sqlite/data/import_longlist.sql
+
+import-library-sqlite:
+	docker compose exec -T sqlite sqlite3 /workspace/practice.db < sqlite/data/import_library.sql
+
+import-all-sqlite: up-sqlite
+	docker compose exec -T sqlite sqlite3 /workspace/practice.db < sqlite/data/import_longlist.sql
+
+i: import-library-sqlite
 
 reset-mysql: run-mysql
 

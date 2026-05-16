@@ -1,5 +1,11 @@
 # SQL Commands
 
+Import the full library schema and CSV seed data:
+
+```bash
+docker compose exec -T sqlite sqlite3 /workspace/practice.db < sqlite/data/import_library.sql
+```
+
 Confirm Schema with this:
 
 ```bash
@@ -131,7 +137,42 @@ You can quit the sqlite termina with:
 .quit
 ```
 
-## Relational Databases
+### Subqueries
+
+1.
+
+```bash
+SELECT "id" FROM "publishers" WHERE "name" = 'Norton';
+SELECT "title" FROM "books" WHERE "publisher_id" = 5;
+
+SELECT "title" FROM "books"
+WHERE "publisher_id" = (
+  SELECT "id" FROM "publishers"
+  WHERE "name" = 'Norton'
+);
+```
+
+```bash
+SELECT "id" FROM "books" WHERE "title" = 1984;
+SELECT "rating" FROM "ratings" WHERE "book_id" = 5;
+
+SELECT "id" FROM "ratings" WHERE "book_id" = (
+  SELECT "id" FROM "books" WHERE "title" = 1884
+);
+
+SELECT AVG("rating") FROM "ratings" WHERE "book_id" = (
+  SELECT "id" FROM "books" WHERE "title" = 1984
+);
+
+SElecT "name" FROM "authors" WHERE "id" = (
+  SELECT "author_id" FROM "authored" WHERE "book_id" = (
+    SELECT "id" FROM "books" WHERE "title" = 1984
+  )
+);
+
+
+```
+
 
 
 

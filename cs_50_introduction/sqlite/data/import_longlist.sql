@@ -14,7 +14,7 @@ CREATE TABLE longlist (
 );
 
 .mode csv
-.import --skip 1 /docs/longlist.csv longlist
+.import --skip 1 /docs/csv_files/longlist.csv longlist
 .headers on
 .mode column
 

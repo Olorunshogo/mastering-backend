@@ -353,15 +353,15 @@ DELETE FROM enrollments
 WHERE student_id = 4 AND course_id = 1;
 ```
 
-## 8. Import `docs/longlist.csv`
+## 8. Import `docs/csv_files/longlist.csv`
 
-The file [docs/longlist.csv](/home/olorunshogo/Projects/mastering-backend/cs_50_introduction/docs/longlist.csv) is mounted inside every container at:
+The file [docs/csv_files/longlist.csv](/home/olorunshogo/Projects/mastering-backend/cs_50_introduction/docs/csv_files/longlist.csv) is mounted inside every container at:
 
 ```text
-/docs/longlist.csv
+/docs/csv_files/longlist.csv
 ```
 
-This means you can keep CSV files in `cs_50_introduction/docs/` and import them from inside MySQL, Postgres, or SQLite.
+This means you can keep CSV files in `cs_50_introduction/docs/csv_files/` and import them from inside MySQL, Postgres, or SQLite.
 
 ### Import into MySQL
 
@@ -500,11 +500,11 @@ You can change these in `docker-compose.yml`.
 - `docker-compose.yml` -> defines all 3 environments
 - `Makefile` -> shortcuts for common commands
 - `guide.md` -> this guide
-- `docs/longlist.csv` -> CSV data file used for import practice
+- `docs/csv_files/longlist.csv` -> CSV data file used for import practice
 - `sql/init/lesson1.sql` -> starter MySQL practice script
-- `sql/import_longlist.sql` -> imports `docs/longlist.csv` into MySQL
+- `sql/import_longlist.sql` -> imports `docs/csv_files/longlist.csv` into MySQL
 - `postgres/init/lesson1.sql` -> starter Postgres practice script
-- `postgres/import_longlist.sql` -> imports `docs/longlist.csv` into Postgres
+- `postgres/import_longlist.sql` -> imports `docs/csv_files/longlist.csv` into Postgres
 - `sqlite/data/lesson1.sql` -> starter SQLite practice script
-- `sqlite/data/import_longlist.sql` -> imports `docs/longlist.csv` into SQLite
+- `sqlite/data/import_longlist.sql` -> imports `docs/csv_files/longlist.csv` into SQLite
 - `sqlite/data/practice.db` -> SQLite database file created after you run SQLite commands

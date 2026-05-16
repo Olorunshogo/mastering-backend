@@ -13,7 +13,7 @@ CREATE TABLE longlist (
   pages INT
 );
 
-LOAD DATA LOCAL INFILE '/docs/longlist.csv'
+LOAD DATA LOCAL INFILE '/docs/csv_files/longlist.csv'
 INTO TABLE longlist
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\n'

@@ -48,7 +48,10 @@ services:
     container_name: cs50_sqlite
     restart: unless-stopped
     working_dir: /workspace
-    entrypoint: ["sleep", "infinity"]
+    entrypoint:
+      - /bin/sh
+      - -lc
+      - sqlite3 /workspace/practice.db < /workspace/import_library.sql && exec sleep infinity
     volumes:
       - ./sqlite/data:/workspace
       - ./docs:/docs:ro
